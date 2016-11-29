@@ -1,72 +1,89 @@
+///////////////////////////////////////////////////////////
+//         Cody Krukauskas                               //
+//                 Analysis of Algorithms								 //
+//         Project 3 - 3D Maze 													 //
+///////////////////////////////////////////////////////////
+
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
 #include <fstream>
 #include <string>
-#include <queue>       
+#include <queue>
 
 
 using namespace std;
 
 
 struct vertex {
-	int value; 		//the binary we are dealing with 
+	string value; 				//the binary we are dealing with (6 bits: N E S W U D )
 	bool discovered;
-	int col;
-	int row; 
-	int level;
-}; 
+	int i, j, k;					//level, col, row
+};
 
-void findNeighbors(string value, int i, int j, int k){
-	cout << "we are at: " << i << ", " << j << ", " << k <<  endl;
-	//floor = i 
-	//row = j 
-	//col = k
-	//N E S  W U D 
-	if(value[0] ==  '1'){
-		cout << "NORTH!   " ;
-		cout << "go to: " << i << ", " << j - 1 << ", " << k <<  endl;
-		//findNeighbors(
-	}
-	if(value[1] ==  '1'){
-		cout << "EAST!    " ;
-		cout << "go to: " << i << ", " << j << ", " << k + 1 <<  endl;
-	}
-	if(value[2] ==  '1'){
-		cout << "SOUTH!   " ;
-		cout << "go to: " << i << ", " << j + 1<< ", " << k <<  endl;
-	}
-	if(value[3] ==  '1'){
-		cout << "WEST     " ;
-		cout << "go to: " << i << ", " << j << ", " << k - 1 <<  endl;
-	}
-	if(value[4] ==  '1'){
-		cout << "UP!      " ;
-		cout << "go to: " << i + 1<< ", " << j << ", " << k  <<  endl;
-	}
-	if(value[5] ==  '1'){
-		cout << "DOWN!    " ;
-		cout << "go to: " << i -1 << ", " << j << ", " << k <<  endl;	
-	}
-	cout << endl;
 
+void findExit(string value, int i, int j, int k){
+	//while we don't have the neighbors
+	//get front of Queue, throw it away?
+	//use findNeighbors. // make sure they aren't visitied
 }
 
-	
+//void findNeighbors( vertex * map, queue<vertex> Q, vertex * v, int i, int j, int k){
+void findNeighbors(queue<vertex> Q){
+	int i, j, k;
+	//really want to be passing, Queue, map, start pos, end and returning the path.
+
+//	while(!Q.empty()){
+		vertex cur = Q.front();
+		string value = cur.value;
+		//need to mark first as visited in map...
+		Q.pop();
+		i = cur.i; j = cur.j; k = cur.k;
+		cout << "current position: (" << i << ", " << j << ", " << k << ")" << endl;
+		cout << "we can go: ";
+
+
+
+	if(value[0] ==  '1'){		//NORTH
+		//Q.push(map[i][j-1][k]);
+		cout << "North...  ";
+	}
+	if(value[1] ==  '1'){		//EAST
+		cout << "East...  ";
+		//Q.push(map[i][j-1][k]);
+	}
+	if(value[2] ==  '1'){		//SOUTH
+		cout << "South...  ";
+  	//Q.push(map[i][j+1][k]);
+	}
+	if(value[3] ==  '1'){		//WEST
+		cout << "West...  ";
+  	//Q.push(map[i][j][k-1]);
+	}
+	if(value[4] ==  '1'){		//UP
+		cout << "Up...  ";
+  	//Q.push(map[i+1][j][k]);
+	}
+	if(value[5] ==  '1'){		//DOWN
+		cout << "Down...  ";
+  	//Q.push(map[i-1][j][k]);
+	}
+	cout << endl;
+//}
+}
+
+
 int main(int argc, char* argv[]) {
+	ifstream inputFile;
+	queue<vertex> Q;			//queue for BFS
+
 	int numMazes;
 	int levels, rows, columns;
+
 	int startL, startR, startC;
-	int endL, endR, endC;
+	int   endL,   endR,   endC;
 
-
-	int i = 0;					//counter variable
-	int t = 0;					//bucket size
-	int n = 0;					//length of our case
-	int value = 0;
-	int sumofNum =0;
-	queue<string> working;
-	ifstream inputFile;
 
 	if(argc != 2) {
 			cout << "\nInvalid number arguments. \
@@ -81,7 +98,7 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	//currently unused output. 
+	//currently unused output.
 	//ofstream output;
 	//output.open("output.txt");
 
@@ -89,34 +106,35 @@ int main(int argc, char* argv[]) {
 	cout << "we have " << numMazes << " mazes." << endl;
 
 	for(int maze = 0 ; maze < numMazes; maze++){
-		cout << endl << endl << "Maze: " << maze << endl;	
-		inputFile >> levels >> rows >> columns; 
+
+		inputFile >> levels >> rows >> columns;
 		inputFile >> startL >> startR >> startC;
 		inputFile >> endL >> endR >> endC;
 
-		cout << "our maze is: " << levels << "x" << rows << "x" << columns << endl;
-	
-		cout << "start: (" << startL << ", " << startR << ", " << startC << ")" <<  endl;
-		cout << "end:   (" << endL << ", "  << endR << ", " << endC <<")"<< endl;
+		cout << endl << "Maze: " << maze << " " << levels << "x" << rows << "x" << columns << endl;
 
-		string map[levels][rows][columns] = {}; 
+		//output start to finish
+		cout << "(" << startL << ", " << startR << ", " << startC << ")" << " --->";
+		cout << "(" << endL 	<< ", " << endR 	<< ", " << endC 	<< ")"<< endl << endl;
+
+
+		vertex map[levels][rows][columns] = {};
 		for( int i = 0 ; i < levels; i++){
-			cout << endl << endl << "level " << i <<": ";
 			for(int j = 0; j < rows; j++){
-				cout << endl << "row " << j << ": " << endl;
-				for(int k = 0; k < columns; k++){ 
-					inputFile >> map[i][j][k];
-					//findNeighbors(map[i][j][k], i, j, k);
-					//cout  << setw(6) << map[i][j][k] << " " ;
-					
+				for(int k = 0; k < columns; k++){
+						vertex *v = new vertex;
+						inputFile >> v->value;
+							v->i = i;
+							v->j = j;
+							v->k = k;
+						map[i][j][k] = *v;					//add the pointer to v in the map
 				}
 			}
 		}
 
-		//While(we aren't at end position && Q isn't empty) 
-			findNeighbors(map[startL][startR][startC], startL, startR, startC);
-		
-		
-	}
-}
+		Q.push(map[startL][startR][startC]);			//push start onto Queue
+		findNeighbors(Q);
+		Q.pop();																	//remove start bc this isn't working.
+		}
 
+	}
