@@ -6,8 +6,8 @@ Based on the Itsy Bitsy Spider situation described in the pdf.
 
 
 #Project 3: Graph modeling and graph algorithms
-COT 4400, Fall 2016
-Due Nov 30, 2016
+COT 4400, Fall 2016  
+Due Nov 30, 2016  
 ## 1 Overview
 This project requires you to model the problem below as graph and then use a known graph
 algorithm to solve the problem. You are not allowed to use the internet or consult any
