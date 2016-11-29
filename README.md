@@ -1,13 +1,9 @@
-# algo-3
-Algorithms Project to find a path from a multidimensional maze 
+#Project 3: Graph modeling and graph algorithms  
 
-
-Based on the Itsy Bitsy Spider situation described in the pdf. 
-
-
-#Project 3: Graph modeling and graph algorithms
 COT 4400, Fall 2016  
+
 Due Nov 30, 2016  
+
 ## 1 Overview
 This project requires you to model the problem below as graph and then use a known graph
 algorithm to solve the problem. You are not allowed to use the internet or consult any
@@ -75,97 +71,97 @@ appears. Each line has c 6-digit binary values, where each bit represents whethe
 travel in that direction (1) or not (0). The direction bits are given in the order north, east, south,
 west, up, and down.
 For the original “Itsy Bitsy Spider” maze, the input is:
-5
-0
-4
-010010
-001010
-101010
-100000
-010001
-000011
-010001
-010010
-001010
-101001
-100010
-000011
-000001
-010010
-010001
-000011
-011000
-101001
-101000
-100001
+            5
+            0
+            4
+            010010
+            001010
+            101010
+            100000
+            010001
+            000011
+            010001
+            010010
+            001010
+            101001
+            100010
+            000011
+            000001
+            010010
+            010001
+            000011
+            011000
+            101001
+            101000
+            100001
 
-4
-3
-0
-010100
-001010
-101000
-100010
-010100
-000011
-000110
-000101
-011000
-100001
-001001
-110000
-001010
-100110
-000110
-010010
-010101
-010001
-010001
-010001
+            4
+            3
+            0
+            010100
+            001010
+            101000
+            100010
+            010100
+            000011
+            000110
+            000101
+            011000
+            100001
+            001001
+            110000
+            001010
+            100110
+            000110
+            010010
+            010101
+            010001
+            010001
+            010001
 
-4
-3
-0
-010100
-001010
-110000
-010010
-011100
-101011
-101000
-100001
-000110
-001001
-110000
-010110
-010001
-001010
-100010
-000101
-010100
-000101
-000101
-010100
-001100
-100010
-000110
-000100
-000110
-000011
-001001
-100010
-001001
-100011
-000110
-000111
-000110
-000011
-000011
-000011
-000101
-001001
-100001
-000101
+            4
+            3
+            0
+            010100
+            001010
+            110000
+            010010
+            011100
+            101011
+            101000
+            100001
+            000110
+            001001
+            110000
+            010110
+            010001
+            001010
+            100010
+            000101
+            010100
+            000101
+            000101
+            010100
+            001100
+            100010
+            000110
+            000100
+            000110
+            000011
+            001001
+            100010
+            001001
+            100011
+            000110
+            000111
+            000110
+            000011
+            000011
+            000011
+            000101
+            001001
+            100001
+            000101
 
 
 Note that the levels are given bottom-to-top, rather than top-to-bottom, as they appear in the
@@ -194,70 +190,70 @@ Example
 Consider the 3 × 3 × 3 maze whose layout is represented by the ASCII art below (bottom level
 first):
 
-+-+---+
-|#|# #|
-+-+ +-+
-|#|#|#|
-| +-+ |
-|# # #|
-+-----+
+    +-+---+  
+    |#|# #|  
+    +-+ +-+  
+    |#|#|#|  
+    | +-+ |  
+    |# # #|  
+    +-----+  
 
-+-+---+
-| |# |
-| +-+-+
-| | | |
-+-+ | |
-|#|#|#|
-+-+-+-+
+    +-+---+  
+    | |# |  
+    | +-+-+  
+    | | | |  
+    +-+ | |  
+    |#|#|#|  
+    +-+-+-+  
 
-+---+-+
-|# |#|
-| +-+ |
-|#|
-|
-| +---+
-| # #|
-+-----+
+    +---+-+  
+    |# |#|  
+    | +-+ |  
+    |#|  
+    |  
+    | +---+  
+    | # #|  
+    +-----+  
 
 In this representation, the walls are shown as -, |, and +, while the floors are represented as #.
 Assuming the starting point is the upper-left corner of the bottom (first) level, and the goal is the
 bottom-right of the top (final) level, the input describing this maze is given by:
-3 3 3
-0 0 0
-2 2 2
+      3 3 3
+      0 0 0
+      2 2 2
 
-000010
-001010
-110000
-001001
-100001
-000010
-011000
-101000
-110001
+      000010
+      001010
+      110000
+      001001
+      100001
+      000010
+      011000
+      101000
+      110001
 
-011000
-100010
-010100
-010010
-001011
-100000
-000101
-010001
-010100
+      011000
+      100010
+      010100
+      010010
+      001011
+      100000
+      000101
+      010001
+      010100
 
-000110
-001010
-100100
-000101
-001011
-100000
-001000
-100101
-000100
+      000110
+      001010
+      100100
+      000101
+      001011
+      100000
+      001000
+      100101
+      000100
 
 The solution to this maze is:
-U S D S E E N U U W D D N E U W U W S S E E
+      U S D S E E N U U W D D N E U W U W S S E E
 
 ## 5 Submission
 You must submit a zip archive containing 1) your report (described in Section 2) as a PDF docu-
@@ -272,15 +268,15 @@ your code.
 As this is an individual project, your project report and code will be checked for plagiarism.
 ## 6 Grading
 
-### Report                      50 points
-Graph model                            30
-Algorithm description                  20
+### Report                      50 points  
+Graph model                            30  
+Algorithm description                  20  
 
-### Code                        50 points
-README file                             5
-Follows input and output specs         10
-Compiles and is correct                30
-Good coding style                       5
+### Code                        50 points  
+README file                             5  
+Follows input and output specs         10  
+Compiles and is correct                30  
+Good coding style                       5  
 
 Note: if your code is unreasonably slow, you will lose points for both your algorithm design and
 your correct output grade.
